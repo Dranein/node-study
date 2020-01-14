@@ -16,13 +16,13 @@ function addMapping(router, mapping) {
   for (let key in mapping) {
     let obj = mapping[key];
     if (obj.method === 'GET') {
-      router.get(obj.path, obj.fn);
-      console.log(`register URL mapping: GET ${obj.path}`);
+      router.get(`/${obj.path}`, obj.fn);
+      console.log(`register URL mapping: GET /${obj.path}`);
     } else if (obj.method === 'POST') {
-      router.post(obj.path, obj.fn);
-      console.log(`register URL mapping: POST ${obj.path}`);
+      router.post(`/${obj.path}`, obj.fn);
+      console.log(`register URL mapping: POST /${obj.path}`);
     } else {
-      console.log(`invalid URL: ${obj.method}${obj.path}`);
+      console.log(`invalid URL: ${obj.method}/${obj.path}`);
     }
   }
 }
