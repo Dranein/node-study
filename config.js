@@ -1,5 +1,5 @@
 const config = {
-  database: 'dranein', // 使用哪个数据库
+  database: 'shenfen_manage', // 数据库名称
   username: 'root', // 用户名
   password: 'admin', // 口令
   host: 'localhost', // 主机名

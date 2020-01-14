@@ -1,11 +1,11 @@
 const UserModel = require('../models/User');
 const JsonResult = require('../helper/JsonResult');
-let User = UserModel();
+let userModel = UserModel();
 
 class UserServices {
   getList() {
     return async (ctx, next) => {
-      let user = await User.findAll();
+      let user = await userModel.findAll();
       let jsonResult = new JsonResult(ctx);
       let data = user.length > 0 ? user.map(item => ({
         id: item.id,
@@ -24,7 +24,7 @@ class UserServices {
       } else if (pwd === '') {
         jsonResult.fail({status: 301});
       } else {
-        await User.create({username, pwd});
+        await userModel.create({username, pwd});
         jsonResult.ok();
       }
     }
@@ -39,7 +39,7 @@ class UserServices {
       } else {
         let user = await this.findOneUserById(id);
         if (user) {
-          await User.destroy({where: {id}})
+          await userModel.destroy({where: {id}})
           jsonResult.ok();
         } else {
           jsonResult.fail({status: 101})
@@ -60,7 +60,11 @@ class UserServices {
       } else {
         let user = await this.findOneUserById(id);
         if (user) {
-          await user.update({username});
+          let now = Date.now();
+          await user.update({
+            username,
+            updateAt: now
+          });
           jsonResult.ok();
         } else {
           jsonResult.fail({status: 101})
@@ -70,7 +74,7 @@ class UserServices {
   }
 
   findOneUserById(id) {
-    return User.findOne({where: {id: id}});
+    return userModel.findOne({where: {id: id}});
   };
 }
 
