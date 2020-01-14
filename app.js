@@ -69,8 +69,8 @@ app.use(async (ctx, next) => {
 // add controllers: 路由都在这里控制
 app.use(controller());
 
-app.listen(3001);
-console.log('port 3001....')
+app.listen(8080);
+console.log('port 8080....')
 
 
 
