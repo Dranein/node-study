@@ -2,7 +2,7 @@ const db = require('../db');
 
 module.exports = () => {
   let now = Date.now();
-  return db.sequelize.define('component' , {
+  return db.sequelize.define('agile_case' , {
     id: {
       type: db.INTEGER,
       allowNull: false, // 是否允许为NULL
@@ -21,7 +21,7 @@ module.exports = () => {
       type: db.STRING,
       allowNull: false, // 是否允许为NULL
     },
-    imgUrl: {
+    demoUrl: {
       type: db.STRING,
       allowNull: false, // 是否允许为NULL
     },

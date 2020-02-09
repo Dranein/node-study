@@ -5,15 +5,21 @@ let componentModel = ComponentModel();
 class ComponentServices {
   getList() {
     return async (ctx, next) => {
-      let user = await componentModel.findAll();
+      let component = await componentModel.findAll();
       let jsonResult = new JsonResult(ctx);
-      jsonResult.ok({data: user});
+      jsonResult.ok({data: component});
     }
   }
   addComponent() {
     return async (ctx, next) => {
-      console.log(ctx.request.files);
-      ctx.body = JSON.stringify(ctx.request.files);
+      let jsonResult = new JsonResult(ctx);
+      let {title = '', hallmark = '', imgUrl = '', classify_id = ''} = ctx.request.body;
+      if (title === '' || hallmark === '' || imgUrl === '' || classify_id === '') {
+        jsonResult.fail({status: 301});
+      } else {
+        await componentModel.create({title, hallmark, imgUrl, classify_id});
+        jsonResult.ok();
+      }
     }
   }
 }

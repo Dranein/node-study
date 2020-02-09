@@ -23,11 +23,18 @@ let updateUser = {
   method: 'POST',
   path: 'user/update',
   fn: userServices.updateUser()
-}
+};
+
+let login = {
+  method: 'POST',
+  path: 'user/login',
+  fn: userServices.login()
+};
 
 module.exports = {
   getList,
   addUser,
   updateUser,
-  deleteUser
-}
+  deleteUser,
+  login
+};

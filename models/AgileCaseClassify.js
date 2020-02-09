@@ -2,27 +2,19 @@ const db = require('../db');
 
 module.exports = () => {
   let now = Date.now();
-  return db.sequelize.define('component' , {
+  return db.sequelize.define('agile_case_classify' , {
     id: {
       type: db.INTEGER,
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    classify_id: {
+    name: {
+      type: db.STRING,
+      allowNull: false, // 是否允许为NULL
+    },
+    order: {
       type: db.INTEGER,
-      allowNull: false, // 是否允许为NULL
-    },
-    title: {
-      type: db.STRING,
-      allowNull: false, // 是否允许为NULL
-    },
-    hallmark: {
-      type: db.STRING,
-      allowNull: false, // 是否允许为NULL
-    },
-    imgUrl: {
-      type: db.STRING,
       allowNull: false, // 是否允许为NULL
     },
     createAt: {

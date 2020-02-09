@@ -76,6 +76,34 @@ class UserServices {
   findOneUserById(id) {
     return userModel.findOne({where: {id: id}});
   };
+
+  login() {
+    return async (ctx, next) => {
+      let jsonResult = new JsonResult(ctx);
+      let {username, pwd} = ctx.request.body;
+      console.log(ctx.request.body)
+      if (username === '') {
+        jsonResult.fail({status: 301});
+      } else if (pwd === '') {
+        jsonResult.fail({status: 301});
+      }
+      let user = await userModel.findOne({where: {username}});
+      console.log(user);
+      if (user) {
+        user = await userModel.findOne({where: {username, pwd}});
+        if(user) {
+          let data = {
+            classify: user.classify
+          };
+          jsonResult.ok({data});
+        } else {
+          jsonResult.fail({status: 402});
+        }
+      } else {
+        jsonResult.fail({status: 401});
+      }
+    }
+  };
 }
 
 module.exports = UserServices;

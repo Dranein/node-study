@@ -19,13 +19,11 @@ module.exports = () => {
     },
     createAt: {
       type: db.BIGINT,
-      field: 'create_time',
       allowNull: false,
       defaultValue: now,
     },
     updateAt: {
       type: db.BIGINT,
-      field: 'update_time',
       allowNull: false,
       defaultValue: now,
     }

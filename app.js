@@ -3,6 +3,8 @@ const path = require('path');
 const static = require("koa-static");
 const koaBody = require('koa-body')
 const controller = require('./controller');
+const cors = require('koa-cors');
+
 const Utils = require('./helper/utils');
 
 const app = new Koa();
@@ -22,9 +24,6 @@ app.use(koaBody({
     keepExtensions: true,    // 保持文件的后缀
     maxFieldsSize: 20 * 1024 * 1024, // 文件上传大小
     onFileBegin: (name, file) => { // 文件上传前的设置
-      console.log('------------------------------------')
-      console.log(`name: ${file.name}`);
-      console.log(`fileSavePath: ${file.path}`);
       // 获取文件后缀
       const ext = Utils.getUploadFileExt(file.name);
       // 最终要保存到的文件夹目录
@@ -38,7 +37,6 @@ app.use(koaBody({
       file.path = `${dir}/${fileName}`;
       app.context.uploadpath = app.context.uploadpath ? app.context.uploadpath : {};
       app.context.uploadpath[name] = `${dirName}/${fileName}`;
-      console.log('------------------------------------')
     },
   }
 }));
@@ -51,20 +49,22 @@ app.use(static(
 
 
 // 跨域设置
-app.use(async (ctx, next) => {
-  ctx.set('Access-Control-Allow-Origin', '*');
-  await next();
-});
-app.use(async (ctx, next) => {
-  ctx.set('Access-Control-Allow-Origin', '*');
-  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-  if (ctx.method == 'OPTIONS') {
-    ctx.body = 200;
-  } else {
-    await next();
-  }
-});
+app.use(cors());
+// app.use(async (ctx, next) => {
+//   ctx.set('Access-Control-Allow-Origin', '*');
+//   await next();
+// });
+// app.use(async (ctx, next) => {
+//   ctx.set('Access-Control-Allow-Origin', '*');
+//   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+//   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//   console.log(111111111)
+//   if (ctx.method == 'OPTIONS') {
+//     ctx.body = 200;
+//   } else {
+//     await next();
+//   }
+// });
 
 // add controllers: 路由都在这里控制
 app.use(controller());

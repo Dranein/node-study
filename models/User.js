@@ -18,16 +18,18 @@ module.exports = () => {
       type: db.STRING(50),
       allowNull: false
     },
+    classify: {
+      type: db.INTEGER,
+      allowNull: true
+    },
     createAt: {
       type: db.BIGINT,
       // 可以重写某个字段的字段名
-      field: 'create_time',
       allowNull: false,
       defaultValue: now,
     },
     updateAt: {
       type: db.BIGINT,
-      field: 'update_time',
       allowNull: false,
       defaultValue: now,
     }
