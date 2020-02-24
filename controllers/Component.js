@@ -11,9 +11,9 @@ let addComponent = {
   method: 'POST',
   path: 'component/add',
   fn: componentServices.addComponent()
-}
+};
 
 module.exports = {
   getList,
   addComponent
-}
+};
