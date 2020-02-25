@@ -34,7 +34,7 @@ class IdeaImageServices {
       await ideaImageModel.create({
         title,
         images: JSON.stringify(images),
-        preview_image: JSON.stringify(preview_image),
+        preview_image,
         promotion_industry,
         image_promotion_product,
         advert_type,
@@ -52,7 +52,18 @@ class IdeaImageServices {
   getList() {
     return async (ctx, next) => {
       let jsonResult = new JsonResult(ctx);
-
+      let { current, pageSize } = ctx.request.query;
+      let ideaImageList = await ideaImageModel.findAndCountAll({
+        where: '',
+        limit: Number(pageSize),
+        offset: (Number(current) - 1) * Number(pageSize),
+        order: [
+          ['updateAt', 'DESC'],
+        ]
+      });
+      jsonResult.ok({
+        data: ideaImageList
+      });
     }
   }
 }

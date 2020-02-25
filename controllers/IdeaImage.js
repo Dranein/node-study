@@ -7,6 +7,13 @@ let addIdeaImage = {
   fn: ideaImageServices.addIdeaImage()
 };
 
+let getIdeaImageList = {
+  method: 'GET',
+  path: 'ideaImage/list',
+  fn: ideaImageServices.getList()
+};
+
 module.exports = {
-  addIdeaImage
+  addIdeaImage,
+  getIdeaImageList
 };
