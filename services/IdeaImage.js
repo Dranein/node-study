@@ -1,6 +1,8 @@
 const JsonResult = require('../helper/JsonResult');
 const IdeaImageModel = require('../models/IdeaImage');
 let ideaImageModel = IdeaImageModel();
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class IdeaImageServices {
   addIdeaImage () {
@@ -56,9 +58,18 @@ class IdeaImageServices {
   getList() {
     return async (ctx, next) => {
       let jsonResult = new JsonResult(ctx);
-      let { current, pageSize } = ctx.request.query;
+      let {
+        current,
+        pageSize,
+        promotion_industry = '',
+        advert_type = '',
+        title = '' } = ctx.request.query;
+      let parms = {};
+      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
+      if (advert_type !== '') parms['advert_type'] = advert_type;
+      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
       let ideaImageList = await ideaImageModel.findAndCountAll({
-        where: '',
+        where: parms,
         limit: Number(pageSize),
         offset: (Number(current) - 1) * Number(pageSize),
         order: [
