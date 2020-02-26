@@ -13,7 +13,21 @@ let getIdeaImageList = {
   fn: ideaImageServices.getList()
 };
 
+let deleteIdeaImage = {
+  method: 'GET',
+  path: 'ideaImage/delete',
+  fn: ideaImageServices.deleteIdeaImage()
+};
+
+let updateIdeaImage = {
+  method: 'POST',
+  path: 'ideaImage/update',
+  fn: ideaImageServices.updateIdeaImage()
+};
+
 module.exports = {
   addIdeaImage,
-  getIdeaImageList
+  getIdeaImageList,
+  deleteIdeaImage,
+  updateIdeaImage
 };
