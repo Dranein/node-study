@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80003
 File Encoding         : 65001
 
-Date: 2020-02-25 18:38:55
+Date: 2020-02-27 19:05:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -196,10 +196,10 @@ CREATE TABLE `idea_image` (
   `authors` varchar(255) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
-  `createAt` bigint(64) NOT NULL,
+  `createAt` bigint(64) DEFAULT NULL,
   `updateAt` bigint(64) DEFAULT NULL,
-  PRIMARY KEY (`id`,`createAt`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_image
@@ -218,6 +218,47 @@ INSERT INTO `idea_image` VALUES ('17', '图片创意4', '[\"20200224/15825332528
 INSERT INTO `idea_image` VALUES ('18', '图片创意4', '[\"20200224/15825332528728451.gif\",\"20200224/15825332576595517.jpg\",\"20200224/15825332756716747.gif\"]', '20200224/15825332627083255.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
 INSERT INTO `idea_image` VALUES ('19', '123', '[]', '20200225/15826165058259540.png', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582615088380', '1582615088380');
 INSERT INTO `idea_image` VALUES ('20', 'test', '[]', '20200225/15826167271507683.png', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582616605618', '1582616605618');
+INSERT INTO `idea_image` VALUES ('21', '111111', '[\"20200227/15827862579843419.png\"]', '20200227/15827862613042959.png', '100', '2', '2', '3', '2', '0.00', '0.00', '[\"111\"]', '[]', '0', '1582786273962', '1582786273962');
+INSERT INTO `idea_image` VALUES ('22', '22222', '[]', '', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582792594379', '1582792594379');
+
+-- ----------------------------
+-- Table structure for idea_video
+-- ----------------------------
+DROP TABLE IF EXISTS `idea_video`;
+CREATE TABLE `idea_video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `video_url` varchar(255) DEFAULT NULL,
+  `video_cover` varchar(255) DEFAULT NULL,
+  `promotion_industry` int(11) DEFAULT NULL,
+  `video_type` int(11) DEFAULT NULL,
+  `video_position` int(11) DEFAULT NULL,
+  `advert_type` int(11) DEFAULT NULL,
+  `video_putin_type` int(11) DEFAULT NULL,
+  `video_promotion_product` int(11) DEFAULT NULL,
+  `click_rate` double(11,2) DEFAULT NULL,
+  `conversion_cost` double(11,2) DEFAULT NULL,
+  `authors` varchar(255) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `status` int(5) DEFAULT NULL,
+  `createAt` bigint(64) DEFAULT NULL,
+  `updateAt` bigint(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of idea_video
+-- ----------------------------
+INSERT INTO `idea_video` VALUES ('1', 'test', '20200227/15827931540508880.mp4', '20200227/15827931583911886.gif', '1', '2', '2', '2', '2', '2', '0.50', '300.00', '[\"test1\",\"125555\"]', '[\"tag1\",\"tag\"]', '0', '1582793185139', '1582793185139');
+INSERT INTO `idea_video` VALUES ('2', 'test2', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582793231771', '1582793231771');
+INSERT INTO `idea_video` VALUES ('3', '3', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794471933', '1582794471933');
+INSERT INTO `idea_video` VALUES ('4', '3', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794474802', '1582794474802');
+INSERT INTO `idea_video` VALUES ('5', '5555', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794478539', '1582794478539');
+INSERT INTO `idea_video` VALUES ('6', '545454646', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794482536', '1582794482536');
+INSERT INTO `idea_video` VALUES ('7', '55645646', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794485998', '1582794485998');
+INSERT INTO `idea_video` VALUES ('8', '66666', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794489632', '1582794489632');
+INSERT INTO `idea_video` VALUES ('9', '4564646', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794493089', '1582794493089');
+INSERT INTO `idea_video` VALUES ('10', '464646465', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794499914', '1582794499914');
 
 -- ----------------------------
 -- Table structure for tag
