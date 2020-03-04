@@ -1,50 +1,63 @@
 const JsonResult = require('../helper/JsonResult');
-const IdeaImageModel = require('../models/IdeaImage');
-let ideaImageModel = IdeaImageModel();
+const IdeaWebpageModel = require('../models/IdeaWebpage');
+let ideaWebpageModel = IdeaWebpageModel();
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-class IdeaImageServices {
-  addIdeaImage () {
+class IdeaVideoServices {
+  add () {
     return async (ctx, next) => {
       let jsonResult = new JsonResult(ctx);
       let {
         title = '',
-        images = '',
-        preview_image = '',
+        url = '',
+        image_cover = '',
         promotion_industry = '',
-        image_promotion_product = '',
         advert_type = '',
-        image_show_type = '',
-        image_putin_type = '',
-        click_rate = '',
+        webpage_type = '',
+        conversion_type = '',
+        promotion_cycle = '',
+        page_num = '',
         conversion_cost = '',
+        uv = '',
+        average_time = '',
+        click_rate = '',
+        conversion_rate = '',
+        nice_reason = '',
+        bright_analysis = '',
+        top_copywritings = '',
         authors = '',
         tags = '',
         status= ''
       } = ctx.request.body;
       if (promotion_industry === ''
-        || image_promotion_product === ''
         || advert_type === ''
-        || image_show_type === ''
-        || image_putin_type === ''
+        || webpage_type === ''
+        || conversion_type === ''
         || click_rate === ''
         || conversion_cost === '') {
         jsonResult.fail({status: 301});
         return false;
       }
       let now = Date.now();
-      await ideaImageModel.create({
+      await ideaWebpageModel.create({
+        url,
         title,
-        images: JSON.stringify(images),
-        preview_image,
+        image_cover,
         promotion_industry,
-        image_promotion_product,
         advert_type,
-        image_show_type,
-        image_putin_type,
-        click_rate,
+        webpage_type,
+        conversion_type,
+        promotion_cycle,
+        page_num,
         conversion_cost,
+        uv,
+        average_time,
+        click_rate,
+        conversion_rate,
+        nice_reason,
+        bright_analysis,
+        top_copywritings: JSON.stringify(top_copywritings),
         authors: JSON.stringify(authors),
         tags: JSON.stringify(tags),
         status,
@@ -64,13 +77,15 @@ class IdeaImageServices {
         promotion_industry = '',
         advert_type = '',
         status = '',
+        webpage_type = '',
         title = '' } = ctx.request.query;
       let parms = {};
-      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
       if (status !== '') parms['status'] = status;
+      if (webpage_type !== '') parms['webpage_type'] = webpage_type;
+      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
       if (advert_type !== '') parms['advert_type'] = advert_type;
       if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
-      let ideaImageList = await ideaImageModel.findAndCountAll({
+      let ideaWebpageList = await ideaWebpageModel.findAndCountAll({
         where: parms,
         limit: Number(pageSize),
         offset: (Number(current) - 1) * Number(pageSize),
@@ -79,21 +94,21 @@ class IdeaImageServices {
         ]
       });
       jsonResult.ok({
-        data: ideaImageList
+        data: ideaWebpageList
       });
     }
   }
 
-  deleteIdeaImage() {
+  delete() {
     return async (ctx, next) => {
       let jsonResult = new JsonResult(ctx);
       let {id} = ctx.request.query;
       if (!id || id === '') {
         jsonResult.fail({ctx, status: 403})
       } else {
-        let ideaImage = await this.findOneUserById(id);
-        if (ideaImage) {
-          await ideaImageModel.destroy({where: {id}})
+        let ideaWebpage = await this.findOneUserById(id);
+        if (ideaWebpage) {
+          await ideaWebpageModel.destroy({where: {id}})
           jsonResult.ok();
         } else {
           jsonResult.fail({status: 101})
@@ -102,21 +117,28 @@ class IdeaImageServices {
     }
   }
 
-  updateIdeaImage() {
+  update() {
     return async (ctx, next) => {
       let jsonResult = new JsonResult(ctx);
       let {id = ''} = ctx.request.query;
       let {
         title = '',
-        images = '',
-        preview_image = '',
+        url = '',
+        image_cover = '',
         promotion_industry = '',
-        image_promotion_product = '',
         advert_type = '',
-        image_show_type = '',
-        image_putin_type = '',
-        click_rate = '',
+        webpage_type = '',
+        conversion_type = '',
+        promotion_cycle = '',
+        page_num = '',
         conversion_cost = '',
+        uv = '',
+        average_time = '',
+        click_rate = '',
+        conversion_rate = '',
+        nice_reason = '',
+        bright_analysis = '',
+        top_copywritings = '',
         authors = '',
         tags = '',
         status= ''
@@ -124,24 +146,31 @@ class IdeaImageServices {
       if (id === '') {
         jsonResult.fail({ctx, status: 302})
       } else {
-        let ideaImage = await this.findOneUserById(id);
-        if (ideaImage) {
+        let ideaWebpage = await this.findOneUserById(id);
+        if (ideaWebpage) {
           let now = Date.now();
-          await ideaImage.update({
+          await ideaWebpage.update({
+            url,
             title,
-            images: JSON.stringify(images),
-            preview_image,
+            image_cover,
             promotion_industry,
-            image_promotion_product,
             advert_type,
-            image_show_type,
-            image_putin_type,
-            click_rate,
+            webpage_type,
+            conversion_type,
+            promotion_cycle,
+            page_num,
             conversion_cost,
+            uv,
+            average_time,
+            click_rate,
+            conversion_rate,
+            nice_reason,
+            bright_analysis,
+            top_copywritings: JSON.stringify(top_copywritings),
             authors: JSON.stringify(authors),
             tags: JSON.stringify(tags),
-            status: status,
-            updateAt: now
+            status,
+            updateAt: now,
           });
           jsonResult.ok();
         } else {
@@ -152,8 +181,8 @@ class IdeaImageServices {
   };
 
   findOneUserById(id) {
-    return ideaImageModel.findOne({where: {id: id}});
+    return ideaWebpageModel.findOne({where: {id: id}});
   };
 }
 
-module.exports = IdeaImageServices;
+module.exports = IdeaVideoServices;

@@ -66,12 +66,14 @@ class IdeaOpenscreenServices {
             let {
                 current,
                 pageSize,
+                status = '',
                 promotion_industry = '',
                 openscreen_putin_type = '',
                 openscreen_show_type = '',
                 openscreen_promotion_product = '',
                 title = '' } = ctx.request.query;
             let parms = {};
+            if (status !== '') parms['status'] = status;
             if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
             if (openscreen_putin_type !== '') parms['openscreen_putin_type'] = openscreen_putin_type;
             if (openscreen_show_type !== '') parms['openscreen_show_type'] = openscreen_show_type;

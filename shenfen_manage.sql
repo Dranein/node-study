@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 80019
+Source Server Version : 80003
 Source Host           : localhost:3306
 Source Database       : shenfen_manage
 
 Target Server Type    : MYSQL
-Target Server Version : 80019
+Target Server Version : 80003
 File Encoding         : 65001
 
-Date: 2020-02-28 17:04:03
+Date: 2020-03-04 15:42:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,13 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `component`;
 CREATE TABLE `component` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `classify_id` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `classify_id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `hallmark` varchar(255) DEFAULT NULL,
   `imgUrl` varchar(255) DEFAULT NULL,
-  `create_time` bigint DEFAULT NULL,
-  `update_time` bigint DEFAULT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,11 +39,11 @@ CREATE TABLE `component` (
 -- ----------------------------
 DROP TABLE IF EXISTS `component_classify`;
 CREATE TABLE `component_classify` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `order` int NOT NULL,
-  `create_time` bigint DEFAULT NULL,
-  `update_time` bigint DEFAULT NULL,
+  `order` int(11) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
@@ -67,13 +67,13 @@ INSERT INTO `component_classify` VALUES ('11', 'VR', '10', '1578987133708', '157
 -- ----------------------------
 DROP TABLE IF EXISTS `dict`;
 CREATE TABLE `dict` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dict_type` varchar(255) DEFAULT NULL,
   `dict_name` varchar(255) DEFAULT NULL,
-  `dict_id` int DEFAULT NULL,
+  `dict_id` int(11) DEFAULT NULL,
   `dict_content` varchar(255) DEFAULT NULL,
-  `createAt` bigint DEFAULT NULL,
-  `updateAt` bigint DEFAULT NULL,
+  `createAt` bigint(20) DEFAULT NULL,
+  `updateAt` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
@@ -176,132 +176,139 @@ INSERT INTO `dict` VALUES ('93', 'conversion_type', '转化类型', '3', '咨询
 INSERT INTO `dict` VALUES ('94', 'conversion_type', '转化类型', '4', '微信', '1578987133708', '1578987133708');
 INSERT INTO `dict` VALUES ('95', 'conversion_type', '转化类型', '5', '下载', '1578987133708', '1578987133708');
 INSERT INTO `dict` VALUES ('96', 'conversion_type', '转化类型', '6', '纯曝光', '1578987133708', '1578987133708');
+INSERT INTO `dict` VALUES ('97', 'status', '创意状态', '0', '上传成功', null, null);
+INSERT INTO `dict` VALUES ('98', 'status', '创意状态', '1', '草稿', null, null);
 
 -- ----------------------------
 -- Table structure for idea_image
 -- ----------------------------
 DROP TABLE IF EXISTS `idea_image`;
 CREATE TABLE `idea_image` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
   `preview_image` varchar(255) DEFAULT NULL,
-  `promotion_industry` int DEFAULT NULL,
-  `image_promotion_product` int DEFAULT NULL,
-  `advert_type` int DEFAULT NULL,
-  `image_show_type` int DEFAULT NULL,
-  `image_putin_type` int DEFAULT NULL,
+  `promotion_industry` int(11) DEFAULT NULL,
+  `image_promotion_product` int(11) DEFAULT NULL,
+  `advert_type` int(11) DEFAULT NULL,
+  `image_show_type` int(11) DEFAULT NULL,
+  `image_putin_type` int(11) DEFAULT NULL,
   `click_rate` double(11,2) DEFAULT NULL,
   `conversion_cost` double(11,2) DEFAULT NULL,
   `authors` varchar(255) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `createAt` bigint NOT NULL,
-  `updateAt` bigint DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createAt` bigint(20) NOT NULL,
+  `updateAt` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`,`createAt`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_image
 -- ----------------------------
-INSERT INTO `idea_image` VALUES ('7', '图片创意1', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('8', '23333', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582704000360');
-INSERT INTO `idea_image` VALUES ('9', '图片创意3', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('10', '4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('11', '图片创意4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('12', '图片创意4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('14', '图片创意4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('16', '图片创意4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('17', '图片创意4', '[\"20200226/15826874698066279.jpg\",\"20200226/15826874729101989.jpg\"]', '20200226/15826874763262758.jpg', '2', '2', '2', '3', '2', '0.20', '200.00', '[\"lijinyuan\",\"liting\"]', '[\"tag1\",\"tag2\"]', '0', '1582531771934', '1582531771934');
-INSERT INTO `idea_image` VALUES ('20', 'test', '[]', '20200226/15826874763262758.jpg', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582616605618', '1582616605618');
-INSERT INTO `idea_image` VALUES ('21', '测试一下文案的标题335555', '[\"20200226/15826874698066279.jpg\",\"20200226/15827024821881118.png\"]', '20200226/15826874763262758.jpg', '1', '2', '1', '2', '1', '0.22', '202.00', '[\"lijinyuan\",\"232323\"]', '[\"12323232\"]', '0', '1582653460374', '1582703951497');
-INSERT INTO `idea_image` VALUES ('22', 'test', '[\"20200226/15827036925254790.png\"]', '20200226/15827036949432747.png', '1', '2', '3', '4', '2', '20.00', '200.00', '[\"123\"]', '[\"123444\"]', '0', '1582702185806', '1582702185806');
-INSERT INTO `idea_image` VALUES ('23', '12333', '[]', '', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582702185806', '1582702185806');
-INSERT INTO `idea_image` VALUES ('25', '33333', '[]', '', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582702185806', '1582702185806');
-INSERT INTO `idea_image` VALUES ('27', '44455', '[\"20200226/15827044123503086.png\"]', '20200226/15827044152678168.jpg', '100', '1', '2', '1', '1', '0.00', '0.00', '[]', '[]', '0', '1582704269790', '1582871706553');
-INSERT INTO `idea_image` VALUES ('28', '2222', '[]', '', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582737571411', '1582737571411');
-INSERT INTO `idea_image` VALUES ('30', '2222222', '[\"20200228/15828716918404793.jpg\"]', '20200228/15828716948229642.jpg', '100', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '0', '1582871538062', '1582871696078');
-INSERT INTO `idea_image` VALUES ('31', '3332', '[\"20200228/15828715444365533.png\",\"20200228/15828715478288999.png\"]', '20200228/15828715526179331.png', '100', '2', '2', '2', '3', '2.00', '200.00', '[\"李金元\"]', '[\"2222\"]', '0', '1582871575164', '1582871678839');
 
 -- ----------------------------
 -- Table structure for idea_openscreen
 -- ----------------------------
 DROP TABLE IF EXISTS `idea_openscreen`;
 CREATE TABLE `idea_openscreen` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `type` int DEFAULT NULL,
-  `image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `video_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `video_cover` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `promotion_industry` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `video_url` varchar(255) DEFAULT NULL,
+  `video_cover` varchar(255) DEFAULT NULL,
+  `promotion_industry` int(11) DEFAULT NULL,
   `promotion_content` varchar(255) DEFAULT NULL,
   `promotion_cycle` varchar(255) DEFAULT NULL,
-  `openscreen_putin_type` int DEFAULT NULL,
-  `openscreen_show_type` int DEFAULT NULL,
-  `openscreen_promotion_product` int DEFAULT NULL,
+  `openscreen_putin_type` int(11) DEFAULT NULL,
+  `openscreen_show_type` int(11) DEFAULT NULL,
+  `openscreen_promotion_product` int(11) DEFAULT NULL,
   `click_rate` double(11,2) DEFAULT NULL,
   `conversion_cost` double(11,2) DEFAULT NULL,
-  `authors` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `tags` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `createAt` bigint NOT NULL,
-  `updateAt` bigint DEFAULT NULL,
+  `authors` varchar(255) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createAt` bigint(20) NOT NULL,
+  `updateAt` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_openscreen
 -- ----------------------------
-INSERT INTO `idea_openscreen` VALUES ('2', '222222222', '1', '20200228/15828788092356290.jpg', '', '', '1', '3333', '', '2', '2', '2', '0.20', '0.00', '[\"222\",\"打发士大夫\"]', '[\"收到\"]', '0', '1582878827261', '1582878827261');
-INSERT INTO `idea_openscreen` VALUES ('3', '3', '2', '', '20200228/15828788492727592.ogv', '20200228/1582878852380620.jpg', '1', '232323', '242424', '1', '1', '1', '1.00', '0.00', '[\"23\"]', '[\"23\"]', '0', '1582878855811', '1582880383740');
-INSERT INTO `idea_openscreen` VALUES ('4', '2', '1', '20200228/15828798703069148.png', '', '', '100', '22222', '3', '1', '1', '1', '0.00', '0.00', '[]', '[]', '0', '1582879770063', '1582880085325');
 
 -- ----------------------------
 -- Table structure for idea_video
 -- ----------------------------
 DROP TABLE IF EXISTS `idea_video`;
 CREATE TABLE `idea_video` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `video_url` varchar(255) DEFAULT NULL,
   `video_cover` varchar(255) DEFAULT NULL,
-  `promotion_industry` int DEFAULT NULL,
-  `video_type` int DEFAULT NULL,
-  `video_position` int DEFAULT NULL,
-  `advert_type` int DEFAULT NULL,
-  `video_putin_type` int DEFAULT NULL,
-  `video_promotion_product` int DEFAULT NULL,
+  `promotion_industry` int(11) DEFAULT NULL,
+  `video_type` int(11) DEFAULT NULL,
+  `video_position` int(11) DEFAULT NULL,
+  `advert_type` int(11) DEFAULT NULL,
+  `video_putin_type` int(11) DEFAULT NULL,
+  `video_promotion_product` int(11) DEFAULT NULL,
   `click_rate` double(11,2) DEFAULT NULL,
   `conversion_cost` double(11,2) DEFAULT NULL,
   `authors` varchar(255) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `createAt` bigint DEFAULT NULL,
-  `updateAt` bigint DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createAt` bigint(20) DEFAULT NULL,
+  `updateAt` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_video
 -- ----------------------------
-INSERT INTO `idea_video` VALUES ('1', 'test', '', '', '1', '2', '2', '2', '2', '2', '0.50', '300.00', '[\"test1\",\"125555\"]', '[\"tag1\",\"tag\"]', '1', '1582793185139', '1582793185139');
-INSERT INTO `idea_video` VALUES ('2', 'test2', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582793231771', '1582793231771');
-INSERT INTO `idea_video` VALUES ('3', '3', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794471933', '1582794471933');
-INSERT INTO `idea_video` VALUES ('4', '3', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794474802', '1582794474802');
-INSERT INTO `idea_video` VALUES ('5', '5555', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794478539', '1582794478539');
-INSERT INTO `idea_video` VALUES ('6', '545454646', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794482536', '1582794482536');
-INSERT INTO `idea_video` VALUES ('7', '55645646', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794485998', '1582794485998');
-INSERT INTO `idea_video` VALUES ('8', '66666', '', '', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '1', '1582794489632', '1582794489632');
-INSERT INTO `idea_video` VALUES ('10', '46444', '20200228/15828251634304062.ogv', '20200228/15828251658928850.png', '100', '1', '1', '1', '1', '1', '0.00', '0.00', '[]', '[]', '0', '1582794499914', '1582825173434');
-INSERT INTO `idea_video` VALUES ('13', '555555555', '20200228/15828251069942420.ogv', '20200228/15828251093127179.png', '100', '2', '2', '2', '1', '2', '0.00', '0.00', '[]', '[]', '0', '1582821102800', '1582825155834');
+
+-- ----------------------------
+-- Table structure for idea_webpage
+-- ----------------------------
+DROP TABLE IF EXISTS `idea_webpage`;
+CREATE TABLE `idea_webpage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_cover` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `promotion_industry` int(11) DEFAULT NULL,
+  `advert_type` int(11) DEFAULT NULL,
+  `webpage_type` int(11) DEFAULT NULL,
+  `conversion_type` int(11) DEFAULT NULL,
+  `promotion_cycle` varchar(255) DEFAULT NULL,
+  `page_num` double DEFAULT NULL,
+  `conversion_cost` double DEFAULT NULL,
+  `uv` int(11) DEFAULT NULL,
+  `average_time` double DEFAULT NULL,
+  `click_rate` double DEFAULT NULL,
+  `conversion_rate` double DEFAULT NULL,
+  `nice_reason` varchar(255) DEFAULT NULL,
+  `bright_analysis` varchar(1200) DEFAULT NULL,
+  `top_copywritings` varchar(255) DEFAULT NULL,
+  `authors` varchar(255) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createAt` bigint(20) NOT NULL,
+  `updateAt` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of idea_webpage
+-- ----------------------------
+INSERT INTO `idea_webpage` VALUES ('3', '', '撒打算', '', '100', '1', '1', '1', '', '1', '0', '0', '0', '0', '0', '', '', '[]', '[]', '[]', '1', '1583305889695', '1583305889695');
 
 -- ----------------------------
 -- Table structure for tag
 -- ----------------------------
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
-  `tag_id` int NOT NULL AUTO_INCREMENT,
+  `tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`tag_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8;
@@ -316,11 +323,11 @@ INSERT INTO `tag` VALUES ('1001', '电影');
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `pwd` varchar(50) NOT NULL,
-  `create_time` bigint DEFAULT NULL,
-  `update_time` bigint DEFAULT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
@@ -335,7 +342,7 @@ INSERT INTO `user` VALUES ('28', '58555', '12', '1578987133708', '1578987133708'
 -- ----------------------------
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
-  `video_id` int NOT NULL AUTO_INCREMENT,
+  `video_id` int(11) NOT NULL AUTO_INCREMENT,
   `video_title` varchar(50) DEFAULT NULL,
   `video_src` varchar(255) DEFAULT NULL,
   `video_tag` varchar(50) DEFAULT NULL,

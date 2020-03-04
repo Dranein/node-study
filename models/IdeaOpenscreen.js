@@ -10,7 +10,7 @@ module.exports = () => {
             autoIncrement: true, // 是否自增
         },
         title: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         type: {
@@ -18,15 +18,15 @@ module.exports = () => {
             allowNull: false
         },
         image_url: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         video_url: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         video_cover: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         promotion_industry: {
@@ -34,11 +34,11 @@ module.exports = () => {
             allowNull: false
         },
         promotion_content: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         promotion_cycle: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         openscreen_putin_type: {
@@ -62,11 +62,11 @@ module.exports = () => {
             allowNull: false
         },
         authors: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         tags: {
-            type: db.STRING(50),
+            type: db.STRING(500),
             allowNull: false
         },
         status: {

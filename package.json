@@ -1,12 +1,12 @@
 {
   "name": "koa-study",
   "version": "1.0.0",
-  "description": "koa学习",
+  "description": "koa素材库",
   "main": "index.js",
   "scripts": {
     "dev": "node app.js"
   },
-  "author": "Dranein",
+  "author": "Dranein@163.com",
   "license": "ISC",
   "dependencies": {
     "koa": "^2.11.0",

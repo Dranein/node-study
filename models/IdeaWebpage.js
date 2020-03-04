@@ -2,7 +2,7 @@ const db = require('../db');
 
 module.exports = () => {
   let now = Date.now();
-  return db.sequelize.define('idea_video', {
+  return db.sequelize.define('idea_webpage', {
     id: {
       type: db.INTEGER,
       allowNull: false, // 是否允许为NULL
@@ -13,11 +13,11 @@ module.exports = () => {
       type: db.STRING(500),
       allowNull: false
     },
-    video_url: {
+    url: {
       type: db.STRING(500),
       allowNull: false
     },
-    video_cover: {
+    image_cover: {
       type: db.STRING(500),
       allowNull: false
     },
@@ -25,32 +25,56 @@ module.exports = () => {
       type: db.INTEGER,
       allowNull: false
     },
-    video_type: {
-      type: db.INTEGER,
-      allowNull: false
-    },
-    video_position: {
-      type: db.INTEGER,
-      allowNull: false
-    },
     advert_type: {
       type: db.INTEGER,
       allowNull: false
     },
-    video_promotion_product: {
+    webpage_type: {
       type: db.INTEGER,
       allowNull: false
     },
-    video_putin_type: {
+    conversion_type: {
       type: db.INTEGER,
+      allowNull: false
+    },
+    promotion_cycle: {
+      type: db.STRING(500),
+      allowNull: false
+    },
+    page_num: {
+      type: db.DOUBLE,
+      allowNull: false
+    },
+    conversion_cost: {
+      type: db.DOUBLE,
+      allowNull: false
+    },
+    uv: {
+      type: db.INTEGER,
+      allowNull: false
+    },
+    average_time: {
+      type: db.DOUBLE,
       allowNull: false
     },
     click_rate: {
       type: db.DOUBLE,
       allowNull: false
     },
-    conversion_cost: {
+    conversion_rate: {
       type: db.DOUBLE,
+      allowNull: false
+    },
+    nice_reason: {
+      type: db.STRING,
+      allowNull: false
+    },
+    bright_analysis: {
+      type: db.STRING(1200),
+      allowNull: false
+    },
+    top_copywritings: {
+      type: db.STRING(500),
       allowNull: false
     },
     authors: {

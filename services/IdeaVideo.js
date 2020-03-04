@@ -67,9 +67,11 @@ class IdeaVideoServices {
         promotion_industry = '',
         advert_type = '',
         video_type = '',
+        status = '',
         video_position = '',
         title = '' } = ctx.request.query;
       let parms = {};
+      if (status !== '') parms['status'] = status;
       if (video_type !== '') parms['video_type'] = video_type;
       if (video_position !== '') parms['video_position'] = video_position;
       if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
