@@ -22,7 +22,7 @@ app.use(koaBody({
   formidable: {
     uploadDir: path.join(__dirname, 'static/'), // 设置文件上传目录
     keepExtensions: true,    // 保持文件的后缀
-    maxFieldsSize: 20 * 1024 * 1024, // 文件上传大小
+    maxFieldsSize: 100 * 1024 * 1024, // 文件上传大小
     onFileBegin: (name, file) => { // 文件上传前的设置
       // 获取文件后缀
       const ext = Utils.getUploadFileExt(file.name);
@@ -33,7 +33,7 @@ app.use(koaBody({
       // 检查文件夹是否存在如果不存在则新建文件夹
       Utils.checkDirExist(dir);
       // 获取文件名称
-      file.name = `${dirName}/${fileName}`;;
+      file.name = `${dirName}/${fileName}`;
       file.path = `${dir}/${fileName}`;
       app.context.uploadpath = app.context.uploadpath ? app.context.uploadpath : {};
       app.context.uploadpath[name] = `${dirName}/${fileName}`;
@@ -50,21 +50,6 @@ app.use(static(
 
 // 跨域设置
 app.use(cors());
-// app.use(async (ctx, next) => {
-//   ctx.set('Access-Control-Allow-Origin', '*');
-//   await next();
-// });
-// app.use(async (ctx, next) => {
-//   ctx.set('Access-Control-Allow-Origin', '*');
-//   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-//   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-//   console.log(111111111)
-//   if (ctx.method == 'OPTIONS') {
-//     ctx.body = 200;
-//   } else {
-//     await next();
-//   }
-// });
 
 // add controllers: 路由都在这里控制
 app.use(controller());

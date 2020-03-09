@@ -169,6 +169,41 @@ class IdeaOpenscreenServices {
     findOneUserById(id) {
         return ideaOpenscreenModel.findOne({where: {id: id}});
     };
+
+    // C端
+    getListToC() {
+        return async (ctx, next) => {
+            let jsonResult = new JsonResult(ctx);
+            let {
+                current,
+                pageSize,
+                status = '',
+                promotion_industry = '',
+                openscreen_putin_type = '',
+                openscreen_show_type = '',
+                openscreen_promotion_product = '',
+                title = '' } = ctx.request.query;
+            let parms = {
+                status: 0
+            };
+            if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
+            if (openscreen_putin_type !== '') parms['openscreen_putin_type'] = openscreen_putin_type;
+            if (openscreen_show_type !== '') parms['openscreen_show_type'] = openscreen_show_type;
+            if (openscreen_promotion_product !== '') parms['openscreen_promotion_product'] = openscreen_promotion_product;
+            if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+            let ideaOpenscreenList = await ideaOpenscreenModel.findAndCountAll({
+                where: parms,
+                limit: Number(pageSize),
+                offset: (Number(current) - 1) * Number(pageSize),
+                order: [
+                    ['updateAt', 'DESC'],
+                ]
+            });
+            jsonResult.ok({
+                data: ideaOpenscreenList
+            });
+        }
+    }
 }
 
 module.exports = IdeaOpenscreenServices;

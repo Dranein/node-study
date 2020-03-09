@@ -25,9 +25,19 @@ let updateIdeaImage = {
   fn: ideaImageServices.updateIdeaImage()
 };
 
+
+// C端
+let getIdeaImageListToC = {
+  method: 'GET',
+  path: 'idea/image/list',
+  fn: ideaImageServices.getListToC()
+};
+
+
 module.exports = {
   addIdeaImage,
   getIdeaImageList,
   deleteIdeaImage,
-  updateIdeaImage
+  updateIdeaImage,
+  getIdeaImageListToC
 };

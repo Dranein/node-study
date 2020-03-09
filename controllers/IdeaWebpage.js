@@ -25,9 +25,17 @@ let update = {
   fn: ideaWebpageServices.update()
 };
 
+// C端
+let getListToC = {
+  method: 'GET',
+  path: 'idea/webpage/list',
+  fn: ideaWebpageServices.getListToC()
+};
+
 module.exports = {
   add,
   getList,
   deleteById,
-  update
+  update,
+  getListToC
 };

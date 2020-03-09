@@ -183,6 +183,40 @@ class IdeaVideoServices {
   findOneUserById(id) {
     return ideaWebpageModel.findOne({where: {id: id}});
   };
+
+  // C端
+  getListToC() {
+    return async (ctx, next) => {
+      let jsonResult = new JsonResult(ctx);
+      let {
+        current,
+        pageSize,
+        promotion_industry = '',
+        advert_type = '',
+        status = '',
+        webpage_type = '',
+        title = '' } = ctx.request.query;
+      let parms = {
+        status: 0
+      };
+      if (webpage_type !== '') parms['webpage_type'] = webpage_type;
+      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
+      if (advert_type !== '') parms['advert_type'] = advert_type;
+      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+      let ideaWebpageList = await ideaWebpageModel.findAndCountAll({
+        where: parms,
+        limit: Number(pageSize),
+        offset: (Number(current) - 1) * Number(pageSize),
+        order: [
+          ['updateAt', 'DESC'],
+        ]
+      });
+      jsonResult.ok({
+        data: ideaWebpageList
+      });
+    }
+  }
+
 }
 
 module.exports = IdeaVideoServices;

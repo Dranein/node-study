@@ -53,7 +53,7 @@ class IdeaImageServices {
       });
       jsonResult.ok();
     }
-  }
+  };
 
   getList() {
     return async (ctx, next) => {
@@ -82,7 +82,7 @@ class IdeaImageServices {
         data: ideaImageList
       });
     }
-  }
+  };
 
   deleteIdeaImage() {
     return async (ctx, next) => {
@@ -100,7 +100,7 @@ class IdeaImageServices {
         }
       }
     }
-  }
+  };
 
   updateIdeaImage() {
     return async (ctx, next) => {
@@ -153,6 +153,37 @@ class IdeaImageServices {
 
   findOneUserById(id) {
     return ideaImageModel.findOne({where: {id: id}});
+  };
+
+  //  toC
+  getListToC () {
+    return async (ctx, next) => {
+      let jsonResult = new JsonResult(ctx);
+      let {
+        current,
+        pageSize,
+        promotion_industry = '',
+        advert_type = '',
+        status = '',
+        title = '' } = ctx.request.query;
+      let parms = {
+        status: 0
+      };
+      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
+      if (advert_type !== '') parms['advert_type'] = advert_type;
+      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+      let ideaImageList = await ideaImageModel.findAndCountAll({
+        where: parms,
+        limit: Number(pageSize),
+        offset: (Number(current) - 1) * Number(pageSize),
+        order: [
+          ['updateAt', 'DESC'],
+        ]
+      });
+      jsonResult.ok({
+        data: ideaImageList
+      });
+    }
   };
 }
 

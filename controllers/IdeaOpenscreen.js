@@ -25,9 +25,17 @@ let update = {
     fn: ideaOpenscreenServices.update()
 };
 
+// C端
+let getListToC = {
+    method: 'GET',
+    path: 'idea/openscreen/list',
+    fn: ideaOpenscreenServices.getListToC()
+};
+
 module.exports = {
     add,
     getList,
     deleteById,
-    update
+    update,
+    getListToC
 };

@@ -25,9 +25,18 @@ let updateIdeaVideo = {
   fn: ideaVideoServices.updateIdeaVideo()
 };
 
+
+// C端
+let getListToC = {
+  method: 'GET',
+  path: 'idea/video/list',
+  fn: ideaVideoServices.getListToC()
+};
+
 module.exports = {
   addIdeaVideo,
   getIdeaVideoList,
   deleteIdeaVideo,
-  updateIdeaVideo
+  updateIdeaVideo,
+  getListToC
 };
