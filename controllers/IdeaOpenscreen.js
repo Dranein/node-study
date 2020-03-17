@@ -32,10 +32,19 @@ let getListToC = {
     fn: ideaOpenscreenServices.getListToC()
 };
 
+
+// C端
+let getDetailToC = {
+    method: 'GET',
+    path: 'idea/openscreen/detail',
+    fn: ideaOpenscreenServices.getDetailToC()
+};
+
 module.exports = {
     add,
     getList,
     deleteById,
     update,
-    getListToC
+    getListToC,
+    getDetailToC
 };

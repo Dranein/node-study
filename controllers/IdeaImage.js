@@ -33,11 +33,17 @@ let getIdeaImageListToC = {
   fn: ideaImageServices.getListToC()
 };
 
+let getIdeaImageDetailToC = {
+  method: 'GET',
+  path: 'idea/image/detail',
+  fn: ideaImageServices.getDetailToC()
+};
 
 module.exports = {
   addIdeaImage,
   getIdeaImageList,
   deleteIdeaImage,
   updateIdeaImage,
-  getIdeaImageListToC
+  getIdeaImageListToC,
+  getIdeaImageDetailToC
 };

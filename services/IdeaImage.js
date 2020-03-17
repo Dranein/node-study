@@ -1,6 +1,8 @@
 const JsonResult = require('../helper/JsonResult');
 const IdeaImageModel = require('../models/IdeaImage');
+
 let ideaImageModel = IdeaImageModel();
+
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -183,6 +185,23 @@ class IdeaImageServices {
       jsonResult.ok({
         data: ideaImageList
       });
+    }
+  };
+
+  getDetailToC () {
+    return async (ctx, next) => {
+      let jsonResult = new JsonResult(ctx);
+      let {id} = ctx.request.query;
+      if (!id || id === '') {
+        jsonResult.fail({ctx, status: 403})
+      } else {
+        let ideaImage = await this.findOneUserById(id);
+        if (ideaImage && ideaImage.status === 0) {
+          jsonResult.ok({data: ideaImage});
+        } else {
+          jsonResult.fail({status: 101});
+        }
+      }
     }
   };
 }
