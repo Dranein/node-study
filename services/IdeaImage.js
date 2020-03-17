@@ -166,21 +166,27 @@ class IdeaImageServices {
         pageSize,
         promotion_industry = '',
         advert_type = '',
-        status = '',
-        title = '' } = ctx.request.query;
+        seachTxt = '',
+        orderBy = '' } = ctx.request.query;
       let parms = {
         status: 0
       };
+      let order = [['updateAt', 'DESC']];
+      if (orderBy === 'pv') {
+        order = [['pv', 'DESC']];
+      }
       if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
       if (advert_type !== '') parms['advert_type'] = advert_type;
-      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+      if (seachTxt !== '') {
+        parms['title'] = { [Op.like]: '%' + seachTxt + '%'};
+        parms['authors'] = { [Op.like]: '%' + seachTxt + '%'};
+        parms['tags'] = { [Op.like]: '%' + seachTxt + '%'};
+      }
       let ideaImageList = await ideaImageModel.findAndCountAll({
         where: parms,
         limit: Number(pageSize),
         offset: (Number(current) - 1) * Number(pageSize),
-        order: [
-          ['updateAt', 'DESC'],
-        ]
+        order
       });
       jsonResult.ok({
         data: ideaImageList
@@ -197,12 +203,20 @@ class IdeaImageServices {
       } else {
         let ideaImage = await this.findOneUserById(id);
         if (ideaImage && ideaImage.status === 0) {
+          this.addPv(ideaImage);
           jsonResult.ok({data: ideaImage});
         } else {
           jsonResult.fail({status: 101});
         }
       }
     }
+  };
+
+  addPv (obj) {
+    obj.update({
+      ...obj,
+      pv: obj.pv + 1
+    });
   };
 }
 
