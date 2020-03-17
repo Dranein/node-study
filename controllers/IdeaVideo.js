@@ -33,10 +33,19 @@ let getListToC = {
   fn: ideaVideoServices.getListToC()
 };
 
+// C端
+let getDetailToC = {
+  method: 'GET',
+  path: 'idea/video/detail',
+  fn: ideaVideoServices.getDetailToC()
+};
+
+
 module.exports = {
   addIdeaVideo,
   getIdeaVideoList,
   deleteIdeaVideo,
   updateIdeaVideo,
-  getListToC
+  getListToC,
+  getDetailToC
 };

@@ -32,10 +32,18 @@ let getListToC = {
   fn: ideaWebpageServices.getListToC()
 };
 
+// C端
+let getDetailToC = {
+  method: 'GET',
+  path: 'idea/webpage/detail',
+  fn: ideaWebpageServices.getDetailToC()
+};
+
 module.exports = {
   add,
   getList,
   deleteById,
   update,
-  getListToC
+  getListToC,
+  getDetailToC
 };

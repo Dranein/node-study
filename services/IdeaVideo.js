@@ -197,7 +197,24 @@ class IdeaVideoServices {
         data: ideaVideoList
       });
     }
-  }
+  };
+
+  getDetailToC () {
+    return async (ctx, next) => {
+      let jsonResult = new JsonResult(ctx);
+      let {id} = ctx.request.query;
+      if (!id || id === '') {
+        jsonResult.fail({ctx, status: 403})
+      } else {
+        let obj = await this.findOneUserById(id);
+        if (obj && obj.status === 0) {
+          jsonResult.ok({data: obj});
+        } else {
+          jsonResult.fail({status: 101});
+        }
+      }
+    }
+  };
 
 }
 
