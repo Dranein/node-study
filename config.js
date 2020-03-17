@@ -23,7 +23,7 @@ const configClound = {
 };
 
 // 虚拟机
-module.exports = configLijinyuanHome;
+module.exports = configClound;
 
 // lijinyuan公司电脑
 // module.exports = configLijinyuanPc;
