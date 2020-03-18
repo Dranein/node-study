@@ -171,16 +171,18 @@ class IdeaImageServices {
       let parms = {
         status: 0
       };
+      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
+      if (advert_type !== '') parms['advert_type'] = advert_type;
       let order = [['updateAt', 'DESC']];
       if (orderBy === 'pv') {
         order = [['pv', 'DESC']];
       }
-      if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
-      if (advert_type !== '') parms['advert_type'] = advert_type;
       if (seachTxt !== '') {
-        parms['title'] = { [Op.like]: '%' + seachTxt + '%'};
-        parms['authors'] = { [Op.like]: '%' + seachTxt + '%'};
-        parms['tags'] = { [Op.like]: '%' + seachTxt + '%'};
+        parms[Op.or] = [
+          { 'title': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'authors': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'tags': { [Op.like]: '%' + seachTxt + '%'} }
+        ];
       }
       let ideaImageList = await ideaImageModel.findAndCountAll({
         where: parms,
@@ -206,13 +208,14 @@ class IdeaImageServices {
           let ideaImageList = await ideaImageModel.findAndCountAll({
             where: {
               promotion_industry: ideaImage.promotion_industry,
-              status: 0
+              status: 0,
+              [Op.not]: [{ id: ideaImage.id}]
             },
             limit: Number(12),
             offset: 0,
             order: [['pv', 'DESC']]
           });
-          let hotList = ideaImageList.rows.filter(item => item.id !== ideaImage.id) || [];
+          let hotList = ideaImageList.rows;
           this.addPv(ideaImage);
           jsonResult.ok({data: {
             detail: ideaImage,

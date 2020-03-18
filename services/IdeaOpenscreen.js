@@ -177,12 +177,12 @@ class IdeaOpenscreenServices {
             let {
                 current,
                 pageSize,
-                status = '',
                 promotion_industry = '',
                 openscreen_putin_type = '',
                 openscreen_show_type = '',
                 openscreen_promotion_product = '',
-                title = '' } = ctx.request.query;
+                seachTxt = '',
+                orderBy = ''} = ctx.request.query;
             let parms = {
                 status: 0
             };
@@ -190,14 +190,22 @@ class IdeaOpenscreenServices {
             if (openscreen_putin_type !== '') parms['openscreen_putin_type'] = openscreen_putin_type;
             if (openscreen_show_type !== '') parms['openscreen_show_type'] = openscreen_show_type;
             if (openscreen_promotion_product !== '') parms['openscreen_promotion_product'] = openscreen_promotion_product;
-            if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+            if (seachTxt !== '') {
+                parms[Op.or] = [
+                    { 'title': { [Op.like]: '%' + seachTxt + '%'} },
+                    { 'authors': { [Op.like]: '%' + seachTxt + '%'} },
+                    { 'tags': { [Op.like]: '%' + seachTxt + '%'} }
+                ];
+            }
+            let order = [['updateAt', 'DESC']];
+            if (orderBy === 'pv') {
+                order = [['pv', 'DESC']];
+            }
             let ideaOpenscreenList = await ideaOpenscreenModel.findAndCountAll({
                 where: parms,
                 limit: Number(pageSize),
                 offset: (Number(current) - 1) * Number(pageSize),
-                order: [
-                    ['updateAt', 'DESC'],
-                ]
+                order
             });
             jsonResult.ok({
                 data: ideaOpenscreenList

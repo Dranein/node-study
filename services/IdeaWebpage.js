@@ -193,23 +193,31 @@ class IdeaVideoServices {
         pageSize,
         promotion_industry = '',
         advert_type = '',
-        status = '',
         webpage_type = '',
-        title = '' } = ctx.request.query;
+        seachTxt = '',
+        orderBy = '' } = ctx.request.query;
       let parms = {
         status: 0
       };
       if (webpage_type !== '') parms['webpage_type'] = webpage_type;
       if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
       if (advert_type !== '') parms['advert_type'] = advert_type;
-      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+      let order = [['updateAt', 'DESC']];
+      if (orderBy === 'pv') {
+        order = [['pv', 'DESC']];
+      }
+      if (seachTxt !== '') {
+        parms[Op.or] = [
+          { 'title': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'authors': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'tags': { [Op.like]: '%' + seachTxt + '%'} }
+        ];
+      }
       let ideaWebpageList = await ideaWebpageModel.findAndCountAll({
         where: parms,
         limit: Number(pageSize),
         offset: (Number(current) - 1) * Number(pageSize),
-        order: [
-          ['updateAt', 'DESC'],
-        ]
+        order
       });
       jsonResult.ok({
         data: ideaWebpageList

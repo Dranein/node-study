@@ -174,9 +174,9 @@ class IdeaVideoServices {
         promotion_industry = '',
         advert_type = '',
         video_type = '',
-        status = '',
         video_position = '',
-        title = '' } = ctx.request.query;
+        seachTxt = '',
+        orderBy = '' } = ctx.request.query;
       let parms = {
         status: 0
       };
@@ -184,14 +184,22 @@ class IdeaVideoServices {
       if (video_position !== '') parms['video_position'] = video_position;
       if (promotion_industry !== '') parms['promotion_industry'] = promotion_industry;
       if (advert_type !== '') parms['advert_type'] = advert_type;
-      if (title !== '') parms['title'] = { [Op.like]: '%' + title + '%'};
+      let order = [['updateAt', 'DESC']];
+      if (orderBy === 'pv') {
+        order = [['pv', 'DESC']];
+      }
+      if (seachTxt !== '') {
+        parms[Op.or] = [
+          { 'title': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'authors': { [Op.like]: '%' + seachTxt + '%'} },
+          { 'tags': { [Op.like]: '%' + seachTxt + '%'} }
+        ];
+      }
       let ideaVideoList = await ideaVideoModel.findAndCountAll({
         where: parms,
         limit: Number(pageSize),
         offset: (Number(current) - 1) * Number(pageSize),
-        order: [
-          ['updateAt', 'DESC'],
-        ]
+        order
       });
       jsonResult.ok({
         data: ideaVideoList
