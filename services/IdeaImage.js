@@ -212,10 +212,11 @@ class IdeaImageServices {
             offset: 0,
             order: [['pv', 'DESC']]
           });
+          let hotList = ideaImageList.rows.filter(item => item.id !== ideaImage.id) || [];
           this.addPv(ideaImage);
           jsonResult.ok({data: {
             detail: ideaImage,
-            hotList: ideaImageList.rows || []
+            hotList
           }});
         } else {
           jsonResult.fail({status: 101});
