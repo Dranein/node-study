@@ -203,8 +203,20 @@ class IdeaImageServices {
       } else {
         let ideaImage = await this.findOneUserById(id);
         if (ideaImage && ideaImage.status === 0) {
+          let ideaImageList = await ideaImageModel.findAndCountAll({
+            where: {
+              promotion_industry: ideaImage.promotion_industry,
+              status: 0
+            },
+            limit: Number(12),
+            offset: 0,
+            order: [['pv', 'DESC']]
+          });
           this.addPv(ideaImage);
-          jsonResult.ok({data: ideaImage});
+          jsonResult.ok({data: {
+            detail: ideaImage,
+            hotList: ideaImageList.rows || []
+          }});
         } else {
           jsonResult.fail({status: 101});
         }
