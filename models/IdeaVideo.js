@@ -65,6 +65,10 @@ module.exports = () => {
       type: db.INTEGER,
       allowNull: false
     },
+    pv: {
+      type: db.INTEGER,
+      allowNull: true
+    },
     createAt: {
       type: db.BIGINT,
       allowNull: false,

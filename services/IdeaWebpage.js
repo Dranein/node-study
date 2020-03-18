@@ -224,14 +224,35 @@ class IdeaVideoServices {
       if (!id || id === '') {
         jsonResult.fail({ctx, status: 403})
       } else {
-        let obj = await this.findOneUserById(id);
-        if (obj && obj.status === 0) {
-          jsonResult.ok({data: obj});
+        let detail = await this.findOneUserById(id);
+        if (detail && detail.status === 0) {
+          let List = await ideaWebpageModel.findAndCountAll({
+            where: {
+              promotion_industry: detail.promotion_industry,
+              status: 0
+            },
+            limit: Number(12),
+            offset: 0,
+            order: [['pv', 'DESC']]
+          });
+          let hotList = List.rows.filter(item => item.id !== detail.id) || [];
+          this.addPv(detail);
+          jsonResult.ok({data: {
+              detail,
+              hotList
+            }});
         } else {
           jsonResult.fail({status: 101});
         }
       }
     }
+  };
+
+  addPv (obj) {
+    obj.update({
+      ...obj,
+      pv: obj.pv + 1
+    });
   };
 }
 
