@@ -245,6 +245,8 @@ class IdeaVideoServices {
           });
           let hotList = List.rows.filter(item => item.id !== detail.id) || [];
           this.addPv(detail);
+          detail.click_rate = '**';
+          detail.conversion_cost = '**';
           jsonResult.ok({data: {
               detail,
               hotList

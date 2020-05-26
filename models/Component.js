@@ -11,19 +11,23 @@ module.exports = () => {
     },
     classify_id: {
       type: db.INTEGER,
-      allowNull: false, // 是否允许为NULL
+      allowNull: true, // 是否允许为NULL
     },
     title: {
       type: db.STRING,
-      allowNull: false, // 是否允许为NULL
+      allowNull: true, // 是否允许为NULL
     },
     hallmark: {
       type: db.STRING,
-      allowNull: false, // 是否允许为NULL
+      allowNull: true, // 是否允许为NULL
     },
     imgUrl: {
       type: db.STRING,
-      allowNull: false, // 是否允许为NULL
+      allowNull: true, // 是否允许为NULL
+    },
+    status: {
+      type: db.INTEGER,
+      allowNull: false
     },
     createAt: {
       type: db.BIGINT,

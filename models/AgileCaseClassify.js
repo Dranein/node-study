@@ -2,7 +2,7 @@ const db = require('../db');
 
 module.exports = () => {
   let now = Date.now();
-  return db.sequelize.define('agile_case_classify' , {
+  return db.sequelize.define('case_classify' , {
     id: {
       type: db.INTEGER,
       allowNull: false, // 是否允许为NULL

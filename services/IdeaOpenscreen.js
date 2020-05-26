@@ -233,6 +233,7 @@ class IdeaOpenscreenServices {
                     });
                     let hotList = List.rows.filter(item => item.id !== detail.id) || [];
                     this.addPv(detail);
+                    detail.click_rate = '**';
                     jsonResult.ok({data: {
                         detail,
                         hotList

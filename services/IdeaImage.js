@@ -217,6 +217,8 @@ class IdeaImageServices {
           });
           let hotList = ideaImageList.rows;
           this.addPv(ideaImage);
+          ideaImage.click_rate = '**';
+          ideaImage.conversion_cost = '**';
           jsonResult.ok({data: {
             detail: ideaImage,
             hotList
