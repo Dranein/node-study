@@ -22,4 +22,4 @@ const configClound = {
   port: 3306 // 端口号，MySQL默认3306
 };
 
-module.exports = configLijinyuanPc;
+module.exports = configClound;
